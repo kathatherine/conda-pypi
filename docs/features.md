@@ -1,7 +1,7 @@
 # Features
 
 `conda-pypi` uses the `conda` plugin system to implement several features
-that make `conda` integrate better with the PyPI ecosystem:
+that improve `conda` integration better with the PyPI ecosystem:
 
 ## The `conda pypi` subcommand
 
@@ -11,13 +11,13 @@ main subcommands that handle different aspects of PyPI integration.
 
 ### `conda pypi install`
 
-The install command takes PyPI packages and converts them to the `.conda` format.
+The install command takes PyPI packages and converts them to `.conda` format.
 Explicitly requested packages are always installed from PyPI and converted
 to `.conda` format to ensure you get exactly what you asked for. For
-dependencies, conda-pypi chooses the best source using a
+dependencies, `conda-pypi` chooses the best source using a
 conda-first approach. If a dependency is available on conda channels, it will
 be installed with `conda` directly. If not available on conda channels, the
-dependency will be converted from PyPI to `.conda` format.
+dependency is converted from PyPI to `.conda` format.
 
 PyPI names are mapped to conda names with a bundled Grayskull table, plus a
 simple normalization rule when a package is not listed. `conda pypi convert`
@@ -56,7 +56,7 @@ conda pypi convert --ignore-channels some-pypi-only-package
 conda pypi convert --name-mapping ./mapping.json ./my-package-1.0.0-py3-none-any.whl
 ```
 
-## PyPI-to-Conda Conversion Engine
+## PyPI-to-conda conversion engine
 
 `conda-pypi` includes a powerful conversion engine that enables direct
 conversion of pure Python wheels to `.conda` packages with proper translation of
@@ -76,6 +76,8 @@ checks `.dist-info/<path>` (pre-PEP 639 wheels) and `.dist-info/licenses/<path>`
 
 PyPI [environment markers](https://packaging.python.org/en/latest/specifications/dependency-specifiers/#environment-markers) are translated for the solver where possible. When building installable .conda packages from wheels, `[when="…"]` is not attached to dependency strings. The `extra == "…"` marker is split into per-extra tables, and other marker conditions are omitted from depends. See {doc}`developer/marker-conversion`.
 
+(wheel-channels)=
+
 ## Wheel channels
 
 :::{admonition} Experimental
@@ -85,6 +87,41 @@ This feature is experimental. It is based on a [draft CEP for Repodata Wheel
 Support](https://github.com/conda/ceps/pull/145) that is still under active
 discussion and subject to change.
 :::
+
+Wheel channels allow conda to resolve and install pure Python wheels directly
+from channel repodata, without a separate conversion step. Each wheel appears
+as a conda-compatible metadata record in the channel's repodata, and the 
+Rattler solver resolves dependencies across both conda packages and wheel 
+packages in a single solve.
+
+### Using the community wheel channel
+
+The conda-pypi community wheel channel is a public channel on anaconda.org
+that makes pure Python packages from PyPI available through `conda pypi install`.
+When you add this channel, conda's solver can find and install these packages
+alongside your regular conda packages in a single step.
+
+For instructions on how to use the conda-pypi community wheel channel, see
+the {doc}`quickstart`.
+
+:::{admonition} Limitations
+:class: warning
+
+The community wheel channel is designed to supplement existing conda channels,
+not replace them. Users should continue to rely on channels such as `conda-forge` 
+for most packages. The wheel channel expands package availability
+for packages that do not exist in conda format.
+
+Other limitations include:
+
+- Only pure Python wheels are available. Compiled wheels are not supported.
+- The security posture is the same as installing from public PyPI. Packages
+are not independently vetted or scanned.
+- The channel hosts metadata only. Wheel artifacts are fetched directly from
+pypi.org.
+:::
+
+### Hosting your own wheel channel
 
 If you maintain a conda channel, you can now serve Python wheels directly
 alongside regular conda packages. Add your wheels to a `v3.whl` section
@@ -105,13 +142,12 @@ via an `extra_depends` field in the repodata entry.
 
 In the PyPA grammar, extras are a comma-separated list of names. Multiple extras union their requirements, and there is no reserved name meaning “all extras.” Optional extras in `extra_depends` are resolved by the Rattler solver.
 
-## Editable Package Support
+## Editable package support
 
 `conda-pypi` supports editable (development) installs for local project
 directories: the project is built into a `.conda` package and installed into
 the environment. This is intended for workflows where you edit code in a
 checkout on disk.
-
 
 Here are some common usage patterns for editable installations:
 

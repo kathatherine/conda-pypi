@@ -1,16 +1,53 @@
-# Quick start
+# Quickstart
 
 ## Installation
 
-`conda-pypi` is a `conda` plugin that needs to be installed next to
-`conda` in the `base` environment:
+`conda-pypi` is a `conda` plugin that is available in your `base` 
+environment in conda versions 26.5 and newer.
+
+Update your conda installation to get `conda-pypi`:
 
 ```bash
-conda install -n base conda-pypi
+conda update conda
+```
+
+You can also install the plugin directly into your `base` environment:
+
+```bash
+conda install --name base conda-pypi
 ```
 
 Once installed, the `conda pypi` subcommand becomes available across all your
 conda environments.
+
+## Set up the community wheel channel
+
+The conda-pypi community wheel channel is a public channel on anaconda.org
+that makes pure Python packages from PyPI available through `conda pypi install`.
+When you add this channel, conda's solver can find and install these packages
+alongside your regular conda packages in a single step.
+
+To enable the conda-pypi channel, configure the Rattler solver, add the channel, and
+reset channel priority to its default (flexible):
+
+```bash
+conda config --set solver rattler
+conda config --append channels conda-pypi
+conda config --set channel_priority flexible
+```
+
+With this configuration, `conda pypi install` can resolve dependencies across both
+regular conda packages and wheel packages in a single solve. When a wheel
+package is selected, conda downloads the artifact directly from PyPI and
+installs it into the environment while tracking it like any other conda
+package.
+
+:::{admonition} Beta
+:class: warning
+The community wheel channel is in public beta. It hosts pure Python wheels
+only. Compiled wheels are not supported. The security posture is the same as
+installing from public PyPI. For more details, see {ref}`wheel-channels`.
+:::
 
 ## Basic usage
 
@@ -19,16 +56,23 @@ accessed through the `conda pypi` command:
 
 ### Installing PyPI packages
 
-Assuming you have an activated conda environment named `my-python-env` that
-includes `python` and `pip` installed, and a configured conda channel, you can
-use `conda pypi install` like this:
+:::{note}
+These instructions assume that you have done the following:
+
+- Created and activated a conda environment
+- Installed `python` and `pip` into that conda environment
+- Added a conda channel to your `.condarc` file (for example, `conda-forge`)
+:::
+
+Use `conda pypi install` to install a package (for example, `niquests`):
 
 ```bash
 conda pypi install niquests
 ```
 
 This will download and convert `niquests` from PyPI to `.conda` format
-(since it was explicitly requested), but install its dependencies from
+(since it was explicitly requested in the install command), 
+but will install its dependencies from
 the conda channel when available. For example, if `niquests` depends on
 `urllib3` and `certifi`, and both are available on the conda channel, those
 dependencies will be installed from conda rather than PyPI.
@@ -59,7 +103,7 @@ conda-pypi will analyze its dependency tree and:
 conda pypi install --ignore-channels some-package
 ```
 
-This forces dependency resolution to use only PyPI, bypassing conda channel
+This command forces dependency resolution to use only PyPI, bypassing conda channel
 checks for dependencies. The requested package is always converted from PyPI
 regardless of this flag.
 
