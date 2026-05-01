@@ -9,9 +9,9 @@ we've discussed to address these issues.
 
 The inspiration for this approach initially started with the [conda-pupa](https://github.com/dholth/conda-pupa)
 project. The philosophy used here is that we can simply convert a wheel from PyPI into a conda
-package and cache it on the host locally. In conda, it's quite easy to configure multiple channels
+package and cache it on the host locally. In conda, it's straightforward to configure multiple channels
 to be used when installing packages, and by default, a "local" channel is included. As `conda-pypi`
-is run, it will begin transforming and caching wheels from PyPI into the conda pacakges which
+is run, it will begin transforming and caching wheels from PyPI into the conda packages which
 are then saved in this local channel.
 
 This is the approach we currently feel most confident with implementing.
@@ -22,4 +22,4 @@ In this approach, we run `pip` with the `--dry-run` option and analyze the propo
 we see which ones are already available on the configured conda channels and install them with `conda` proper.
 For the ones that are not available, we pass them to `pip install --no-deps` and hope for an ABI compatible setting.
 
-This was an approach we initially tried but then gave up in favor for the "conda-pupa" approach.
+This was an approach we initially tried but then abandoned in favor of the "conda-pupa" approach.
