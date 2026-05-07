@@ -2,7 +2,7 @@
 
 ## Installation
 
-`conda-pypi` is a `conda` plugin that is available in your `base` 
+`conda-pypi` is a `conda` plugin that is available in your `base`
 environment in conda versions 26.5 and newer.
 
 Update your conda installation to get `conda-pypi`:
@@ -71,8 +71,8 @@ Use `conda install` to install a package (for example, `niquests`):
 conda install niquests
 ```
 
-This will download and unpack `niquests` from PyPI and 
-install it as a native wheel (`.whl`) file. 
+This will download and unpack `niquests` from PyPI and
+install it as a native wheel (`.whl`) file.
 The dependencies of `niquests` will be installed from
 the conda channel when available. For example, if `niquests` depends on
 `urllib3` and `certifi`, and both are available on the conda channel, those
@@ -82,8 +82,8 @@ dependencies will be installed from conda rather than PyPI.
 conda install build
 ```
 
-This will download and unpack the `build` package from PyPI and 
-install it as a native wheel (`.whl`) file. 
+This will download and unpack the `build` package from PyPI and
+install it as a native wheel (`.whl`) file.
 Even though `python-build` exists on conda, the explicitly requested
 package always comes from PyPI to ensure you get exactly what you asked for.
 However, its dependencies will preferentially come from conda channels when

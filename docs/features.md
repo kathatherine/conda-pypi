@@ -3,11 +3,11 @@
 `conda-pypi` uses the `conda` plugin system to implement several features
 that better improve the `conda` integration with the PyPI ecosystem. This
 page is divided into basic and advanced sections to help you discover
-which features are best for you. 
+which features are best for you.
 
-- **Basic**: For users who just want to use conda and wheels packages 
+- **Basic**: For users who just want to use conda and wheels packages
   together with no changes to their overall workflow.
-- **Advanced**: For users who want to experiment with conda and wheels 
+- **Advanced**: For users who want to experiment with conda and wheels
   and work with cutting-edge plugin features.
 
 ## Basic features
@@ -28,7 +28,7 @@ the {doc}`quickstart`.
 :class: warning
 
 The community wheel channel is designed to supplement existing conda channels,
-not replace them. Users should continue to rely on channels such as `conda-forge` 
+not replace them. Users should continue to rely on channels such as `conda-forge`
 for most packages. The wheel channel expands package availability
 for packages that do not exist in the conda format.
 
@@ -128,8 +128,8 @@ discussion and subject to change.
 
 Wheel channels allow conda to resolve and install pure Python wheels directly
 from channel repodata, without a separate conversion step. Each wheel appears
-as a conda-compatible metadata record in the channel's repodata, and the 
-Rattler solver resolves dependencies across both conda packages and wheel 
+as a conda-compatible metadata record in the channel's repodata, and the
+Rattler solver resolves dependencies across both conda packages and wheel
 packages in a single solve.
 
 If you maintain a conda channel, you can now serve Python wheels directly
