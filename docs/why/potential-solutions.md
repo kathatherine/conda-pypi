@@ -18,7 +18,7 @@ solver selects a wheel, conda downloads the artifact from PyPI and unpacks it in
 environment at install time using conda's package extraction hook. This means that
 no local conversion to the `.conda` format is needed.
 
-For setup instructions for the `conda-pypi` channel, see the {doc}`quickstart`.
+For setup instructions for the `conda-pypi` channel, see the {doc}`../quickstart`.
 
 ## On-the-fly conversion of PyPI wheels to conda packages
 
