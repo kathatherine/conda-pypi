@@ -44,8 +44,8 @@ package.
 
 :::{admonition} Beta
 :class: warning
-The conda-pypi channel is in public beta. It hosts metadata only, for pure Python wheels from PyPI. Compiled wheels are not supported at the moment. 
-The security posture is the same as installing from public PyPI. For more 
+The conda-pypi channel is in public beta. It hosts metadata only, for pure Python wheels from PyPI. Compiled wheels are not supported at the moment.
+The security posture is the same as installing from public PyPI. For more
 details, see {ref}`conda-pypi-channel`.
 :::
 

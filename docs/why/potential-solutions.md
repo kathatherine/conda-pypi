@@ -7,8 +7,8 @@ we've discussed to address these issues.
 
 ## Native wheel installation from a conda channel
 
-When a user configures the `conda-pypi` channel and uses the Rattler solver, 
-conda can install pure Python wheels directly without having to convert 
+When a user configures the `conda-pypi` channel and uses the Rattler solver,
+conda can install pure Python wheels directly without having to convert
 them to `.conda` format first.
 
 In this approach, wheel metadata is published directly in a conda channel's `repodata.json`
