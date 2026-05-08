@@ -22,7 +22,7 @@ conda environments.
 
 ## Set up the community wheel channel
 
-The conda-pypi community wheel channel is a public channel on anaconda.org
+The conda-pypi community wheel channel is a public channel hosted by Anaconda
 that makes pure Python packages from PyPI available through `conda install`.
 When you add this channel, conda's solver can find and install these packages
 alongside your regular conda packages in a single step.
@@ -44,9 +44,9 @@ package.
 
 :::{admonition} Beta
 :class: warning
-The community wheel channel is in public beta. It hosts pure Python wheels
-only. Compiled wheels are not supported. The security posture is the same as
-installing from public PyPI. For more details, see {ref}`community-wheel-channel`.
+The conda-pypi channel is in public beta. It hosts metadata only, for pure Python wheels from PyPI. Compiled wheels are not supported at the moment. 
+The security posture is the same as installing from public PyPI. For more 
+details, see {ref}`community-wheel-channel`.
 :::
 
 ## Basic usage
@@ -60,7 +60,6 @@ accessed through the `conda pypi` command:
 These instructions assume that you have done the following:
 
 - Created and activated a conda environment
-- Installed `python` and `pip` into that conda environment
 - Added the `conda-pypi` channel to your `.condarc` file
 - Configured your solver to be the rattler solver
 :::

@@ -14,20 +14,20 @@ which features are best for you.
 
 (community-wheel-channel)=
 
-### The community wheel channel
+### The conda-pypi channel
 
-The `conda-pypi` community wheel channel is a public channel on anaconda.org
+The `conda-pypi` channel is a public channel hosted by Anaconda
 that makes pure Python packages from PyPI available through `conda install`.
 After you add this channel, conda's solver can find and install these packages
 alongside your regular conda packages in a single step.
 
-For instructions on how to set up the `conda-pypi` community wheel channel, see
+For instructions on how to set up the `conda-pypi` channel, see
 the {doc}`quickstart`.
 
 :::{admonition} Limitations
 :class: warning
 
-The community wheel channel is designed to supplement existing conda channels,
+The conda-pypi channel is designed to supplement existing conda channels,
 not replace them. Users should continue to rely on channels such as `conda-forge`
 for most packages. The wheel channel expands package availability
 for packages that do not exist in the conda format.
