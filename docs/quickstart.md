@@ -20,14 +20,14 @@ conda install --name base conda-pypi
 Once installed, the `conda pypi` subcommand becomes available across all your
 conda environments.
 
-## Set up the community wheel channel
+## Set up the `conda-pypi` channel
 
-The conda-pypi community wheel channel is a public channel hosted by Anaconda
+The `conda-pypi` channel is a public channel hosted by Anaconda
 that makes pure Python packages from PyPI available through `conda install`.
 When you add this channel, conda's solver can find and install these packages
 alongside your regular conda packages in a single step.
 
-To enable the conda-pypi channel, configure the Rattler solver, add the channel, and
+To enable the `conda-pypi` channel, configure the Rattler solver, add the channel, and
 reset channel priority to its default (flexible):
 
 ```bash
@@ -46,15 +46,36 @@ package.
 :class: warning
 The conda-pypi channel is in public beta. It hosts metadata only, for pure Python wheels from PyPI. Compiled wheels are not supported at the moment. 
 The security posture is the same as installing from public PyPI. For more 
-details, see {ref}`community-wheel-channel`.
+details, see {ref}`conda-pypi-channel`.
 :::
+
+## Remove the `conda-pypi` channel
+
+To disable access to the `conda-pypi` channel, run the following command:
+
+```bash
+conda config --remove channels conda-pypi
+```
+
+To view your current channels:
+
+```bash
+conda config --show channels
+```
+
+You can continue to use the Rattler solver without the `conda-pypi` channel,
+but to change your solver back to the default solver (libmama), run the
+following command:
+
+```bash
+conda config --set solver libmama
+```
 
 ## Basic usage
 
-`conda-pypi` provides several {doc}`features`. The main functionality is
-accessed through the `conda pypi` command:
-
-### Installing PyPI packages
+`conda-pypi` provides several {doc}`features`. The most basic usage
+involves using the `conda-pypi` channel and using `conda install`
+to add packages.
 
 :::{note}
 These instructions assume that you have done the following:
@@ -62,50 +83,65 @@ These instructions assume that you have done the following:
 - Created and activated a conda environment
 - Added the `conda-pypi` channel to your `.condarc` file
 - Configured your solver to be the rattler solver
+- Have a conda channel in your `.condarc` file
 :::
 
-Use `conda install` to install a package (for example, `niquests`):
+Use `conda install` to install a package (for example, `django-modern-rest`):
 
 ```bash
-conda install niquests
+conda install django-modern-rest
 ```
 
-This will download and unpack `niquests` from PyPI and
+This will download and unpack `django-modern-rest` from PyPI and
 install it as a native wheel (`.whl`) file.
-The dependencies of `niquests` will be installed from
-the conda channel when available. For example, if `niquests` depends on
-`urllib3` and `certifi`, and both are available on the conda channel, those
+The dependencies of `django-modern-rest` will be installed from
+the conda channel when available. For example, `django-modern-rest` depends on
+`django` and `typing_extensions`. If both are available in your conda channel, those
 dependencies will be installed from conda rather than PyPI.
 
+## Advanced usage
+
+You can also use the `conda pypi` command to install packages from
+PyPI without using the `conda-pypi` channel. This method downloads
+the package from PyPI and converts it to `.conda` format, then installs
+it.
+
+:::{note}
+These instructions assume that you have done the following:
+
+- Created and activated a conda environment
+- Installed `python` and `pip` into that conda environment
+:::
+
 ```bash
-conda install build
+conda pypi install build
 ```
 
-This will download and unpack the `build` package from PyPI and
-install it as a native wheel (`.whl`) file.
+This will download and convert the `build` package from PyPI to `.conda`
+format. Even though `python-build` exists on conda, the explicitly requested
 Even though `python-build` exists on conda, the explicitly requested
 package always comes from PyPI to ensure you get exactly what you asked for.
 However, its dependencies will preferentially come from conda channels when
 available.
 
 ```bash
-conda install some-package-with-many-deps
+conda pypi install some-package-with-many-deps
 ```
 
 Here's where the hybrid approach really shines:
-`some-package-with-many-deps` itself will be installed from PyPI, but
+`some-package-with-many-deps` itself will be converted from PyPI, but
 conda-pypi will analyze its dependency tree and:
 - Install dependencies like `numpy`, `pandas`, etc. from the conda channel (if
   available)
-- Install only the dependencies that aren't available on conda channels from
+- Convert only the dependencies that aren't available on conda channels from
   PyPI
 
 ```bash
-conda install --ignore-channels some-package
+conda pypi install --ignore-channels some-package
 ```
 
 This command forces dependency resolution to use only PyPI, bypassing conda channel
-checks for dependencies. The requested package is always installed from PyPI
+checks for dependencies. The requested package is always converted from PyPI
 regardless of this flag.
 
 ### Converting packages without installing

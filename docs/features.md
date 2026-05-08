@@ -12,7 +12,7 @@ which features are best for you.
 
 ## Basic features
 
-(community-wheel-channel)=
+(conda-pypi-channel)=
 
 ### The conda-pypi channel
 
@@ -167,17 +167,6 @@ conda pypi install -e ./my-project/
 # Multiple local editable packages
 conda pypi install -e ./package1/ -e ./package2/
 ```
-
-### `conda env` integrations
-
-:::{admonition} Coming soon
-:class: seealso
-
-`environment.yml` files famously allow a `pip` subsection in their
-`dependencies`. This is handled internally by `conda env` via a `pip`
-subprocess. We are adding new plugin hooks so `conda-pypi` can handle these
-in the same way we do with the `conda pypi` subcommand.
-:::
 
 (externally-managed)=
 
