@@ -18,7 +18,7 @@ This is a **community-maintained** project under the [conda](https://github.com/
 ## What is this?
 
 The `conda-pypi` plugin improves conda's integration with the PyPI ecosystem. The most
-important feature is the `conda-pypi` channel, hosted by Anaconda, which makes pure 
+important feature is the `conda-pypi` channel, hosted by Anaconda, which makes pure
 Python pacakges from PyPi available to users natively through `conda install`.
 
 ## Using `conda-pypi`
