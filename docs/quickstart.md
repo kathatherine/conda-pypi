@@ -22,6 +22,12 @@ conda environments.
 
 ## Set up the `conda-pypi` channel
 
+:::{note}
+The `conda-pypi` channel is free to use for all users. This channel is not subject
+to the licensing requirements or payment obligations described in Section 1
+of the [Anaconda Terms of Service](https://www.anaconda.com/legal/terms/terms-of-service).
+:::
+
 The `conda-pypi` channel is a public channel hosted by Anaconda
 that makes pure Python packages from PyPI available through `conda install`.
 When you add this channel, conda's solver can find and install these packages
