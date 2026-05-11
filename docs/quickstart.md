@@ -8,7 +8,7 @@ environment in conda versions 26.5 and newer.
 Update your conda installation to get `conda-pypi`:
 
 ```bash
-conda update conda
+conda install --name base "conda>=26.5"
 ```
 
 You can also install the plugin directly into your `base` environment:
