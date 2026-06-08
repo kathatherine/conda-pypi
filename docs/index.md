@@ -20,9 +20,9 @@ the `conda install` command, with no extra conversion needed.
 
 The tool also offers two main commands for more advanced usage: `conda pypi install`
 for safer PyPI package installation with an intelligent hybrid approach,
-and `conda pypi convert` for converting PyPI packages to `.conda` format 
-without installing them. The smart installation strategy ensures that 
-explicitly requested packages come from PyPI while dependencies are sourced 
+and `conda pypi convert` for converting PyPI packages to `.conda` format
+without installing them. The smart installation strategy ensures that
+explicitly requested packages come from PyPI while dependencies are sourced
 from conda channels when available.
 
 `conda-pypi` includes support for development workflows through editable
